@@ -19,7 +19,7 @@ public class UrlMapping {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "short_url", unique = true, nullable = false, length = 6)
+    @Column(name = "short_url", unique = true, nullable = false, length = 50)
     private String shortUrl;
 
     @Column(name = "long_url", nullable = false, columnDefinition = "TEXT")
@@ -27,6 +27,10 @@ public class UrlMapping {
 
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     // Default constructor required by JPA
     public UrlMapping() {
